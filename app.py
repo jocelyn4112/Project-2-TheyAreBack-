@@ -1,5 +1,5 @@
 #Import needed stuff
-from flask import Flask
+from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
 
@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 #Routes
 @app.route('/')
 def index():
-    return 'HW'
+    return render_template('Template\index.html')
 
 #For MongoBD
 ##Make new route
