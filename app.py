@@ -12,10 +12,29 @@ app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb://localhost:27017/
 #Initalize Mongo CLient
 mongo = PyMongo(app)
 
-
+#Routes
 @app.route('/')
 def index():
     return 'HW'
+
+#For MongoBD
+##Make new route
+@app.route('/api/tasks-mongo')
+#Call up DB
+def AliensMongo ():
+    Aliens = mongo.db.Aliens2.find({})
+    data = []
+
+    for Alien in Aliens:
+        item =  {
+            'Datetime': Aliens['datetime'],
+            'City': Aliens['city'],
+        }
+        data.append(item)
+
+    return jsonify (data)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
