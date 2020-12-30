@@ -15,14 +15,14 @@ mongo = PyMongo(app)
 #Routes
 @app.route('/')
 def index():
-    return render_template('Template\index.html')
+    return render_template('template\index.html')
 
 #For MongoBD
 ##Make new route
 @app.route('/api/tasks-mongo')
 #Call up DB
 def AliensMongo ():
-    Aliens = mongo.db.Aliens2.find({})
+    Aliens = mongo.db.Aliens.find({})
     data = []
 
     for Alien in Aliens:
@@ -38,3 +38,19 @@ def AliensMongo ():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#     {
+#   "Datetime": "datetime",
+#   "City": "city>",
+#   "State": "state",
+#   "Shape": "shape",
+#   "Duration": "duration (seconds)",
+#     "Comments": "comments",
+#   "Lat": "latitude",
+#   "Long": "longitude ",
+#   "Month": "Month",
+#   "Day": "Day",
+#   "Time": "Time"
+#   "Year": "Year"
+# }
