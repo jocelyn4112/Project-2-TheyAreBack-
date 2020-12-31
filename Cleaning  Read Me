@@ -1,0 +1,27 @@
+Data Cleanig/ Joining
+
+Data set 1 pulled from  "http://www.nuforc.org/webreports/ndxe202012.html"
+
+Data was pulled in from website listed. 
+
+Duration Field was then parsed to seperate numbers from string. Becasue the data in the Duration column was technically all string.
+Data was parsed by seperating the first three characters into a new column called 'int' and the remaining characters into a column called 'desc'.
+
+Time labels in the desc column were cleaned to recomcile all labels into "sec, "min 'hour'. All stray charachters were removed from the int column and it was converted to numerical.
+The int column and the desc column were used to populate the Duration (seconds) column with the correct time values. 
+
+
+
+Columns were renamed and latitude/longitude columns were added. 
+
+An api call was made to  "https://maps.googleapis.com/maps/api/geocode/json".
+
+Lat and Lon were pulled and added to the data sheet. 
+
+Data sheet was saved as a csv. This prevents needing to re-run the rest of the code if an error  is made. 
+
+Data set 2 Kaggle data
+
+Country and extra Duration columns dropped.
+
+Data sets were cocatinated and unique ids added. The purspose for this is to ensure that each sighting ends up having a unique id. 
