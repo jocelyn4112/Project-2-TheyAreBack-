@@ -19,7 +19,7 @@ def index():
 
 #For MongoBD
 ##Make new route
-@app.route('/api/tasks-mongo')
+@app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
     Aliens = mongo.db.Aliens.find({})
