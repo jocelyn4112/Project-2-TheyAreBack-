@@ -9,6 +9,7 @@ clyent==1.2.1
 dnspython==2.0.0
 Flask==1.1.2
 Flask-PyMongo==2.3.0
+gunicorn==20.0.4
 idna==2.10
 itsdangerous==1.1.0
 Jinja2==2.11.2
