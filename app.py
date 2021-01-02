@@ -7,7 +7,7 @@ from os import environ
 app = Flask(__name__)
 
 #Configure
-app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb://localhost:27017/Aliens2')
+app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb+srv://admin:admin@cluster0.d3dkn.mongodb.net/Aliens2?retryWrites=true&w=majority')
 
 #Initalize Mongo CLient
 mongo = PyMongo(app)
