@@ -21,7 +21,17 @@ def test():
     alienslist = []
     for alien in aliens:
         alienslist.append({
-            '_id': str(alien['_id'])
+            '_id': str(alien['_id']),
+             "City": str(alien['city']),
+             "State": str(alien['state']),
+             "Shape": str(alien['shape']),
+             "Duration": str(alien['duration (seconds)']),
+             "Lat": str(alien['latitude']),
+             "Long": str(alien['longitude']),
+            "Month": str(alien['Month']),
+            "Day": str(alien['Day']),
+             "Time": str(alien['Time']),
+            "Year": str(alien['Year'])
             #add in field names 
         })
         
