@@ -8,7 +8,7 @@ import pymongo
 app = Flask(__name__)
 
 #Configure
-app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
+app.config['MONGO_URI'] = environ.get('MONGODB_URI', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
 
 #Initalize Mongo CLient
 mongo = PyMongo(app)
@@ -36,10 +36,16 @@ def test():
         })
         
     return jsonify(alienslist)
-#Routes
+#Routes - render templates ADDROUTES FOR ALL OF THE PAGES 
 @app.route('/')
 def index():
     return render_template('index.html')
+#FILL ME IN 
+
+# @app.route('/') # all 
+# def index():
+#     return render_template('index.html')
+
 
 #For MongoBD
 ##Make new route
