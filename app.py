@@ -2,16 +2,30 @@
 from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
+import pymongo
 
 #Build App
 app = Flask(__name__)
 
 #Configure
-app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb+srv://admin:admin@cluster0.d3dkn.mongodb.net/Aliens2?retryWrites=true&w=majority')
+app.config['MONGO_URI'] = environ.get('MongoDB_URL', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
 
 #Initalize Mongo CLient
 mongo = PyMongo(app)
 
+#test route
+
+@app.route('/test')
+def test(): 
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist = []
+    for alien in aliens:
+        alienslist.append({
+            '_id': str(alien['_id'])
+            #add in field names 
+        })
+        
+    return jsonify(alienslist)
 #Routes
 @app.route('/')
 def index():
@@ -22,7 +36,7 @@ def index():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
-    Aliens = mongo.db.Aliens.find({})
+    Aliens = mongo.Cluster0.AliensAll.find({})
     data = []
 
     for Alien in Aliens:
