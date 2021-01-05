@@ -40,15 +40,35 @@ def test():
 @app.route('/')
 def index():
     return render_template('index.html')
-#FILL ME IN 
 
-# @app.route('/') # all 
-# def index():
-#     return render_template('index.html')
+# Individual Page Routes
+#about
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+#analyze 
+@app.route('/analyze')
+def analyze():
+    return render_template('analyze.html')
+
+#explore
+@app.route('/explore')
+def explore():
+    return render_template('explore.html')
+
+#jsdata
+@app.route('/jsdata')
+def jsdata():
+    return render_template('jsdata.html')
+
+#obs
+@app.route('/obs')
+def obs():
+    return render_template('obs.html')
 
 
-#For MongoBD
-##Make new route
+##Make new route for API
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
