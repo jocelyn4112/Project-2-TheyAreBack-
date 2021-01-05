@@ -46,17 +46,25 @@ def index():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
-    Aliens = mongo.Cluster0.AliensAll.find({})
-    data = []
-
-    for Alien in Aliens:
-        item =  {
-            'Datetime': Aliens['datetime'],
-            'City': Aliens['city'],
-        }
-        data.append(item)
-
-    return jsonify (data)
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist = []
+    for alien in aliens:
+        alienslist.append({
+            '_id': str(alien['_id']),
+             "City": str(alien['city']),
+             "State": str(alien['state']),
+             "Shape": str(alien['shape']),
+             "Duration": str(alien['duration (seconds)']),
+             "Lat": str(alien['latitude']),
+             "Long": str(alien['longitude']),
+            "Month": str(alien['Month']),
+            "Day": str(alien['Day']),
+             "Time": str(alien['Time']),
+            "Year": str(alien['Year'])
+            #add in field names 
+        })
+        
+    return jsonify(alienslist)
 
 
 
