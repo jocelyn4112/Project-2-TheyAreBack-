@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 
 
 
-#Routes - render templates ADDROUTES FOR ALL OF THE PAGES 
+#Routes - render templates 
 @app.route('/')
 def index():
     return render_template('index.html')
