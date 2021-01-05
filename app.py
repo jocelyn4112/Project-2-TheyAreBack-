@@ -13,29 +13,8 @@ app.config['MONGO_URI'] = environ.get('MONGODB_URI', 'mongodb+srv://admin:Aliens
 #Initalize Mongo CLient
 mongo = PyMongo(app)
 
-#test route
 
-@app.route('/test')
-def test(): 
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
-    alienslist = []
-    for alien in aliens:
-        alienslist.append({
-            '_id': str(alien['_id']),
-             "City": str(alien['city']),
-             "State": str(alien['state']),
-             "Shape": str(alien['shape']),
-             "Duration": str(alien['duration (seconds)']),
-             "Lat": str(alien['latitude']),
-             "Long": str(alien['longitude']),
-            "Month": str(alien['Month']),
-            "Day": str(alien['Day']),
-             "Time": str(alien['Time']),
-            "Year": str(alien['Year'])
-            #add in field names 
-        })
-        
-    return jsonify(alienslist)
+
 #Routes - render templates ADDROUTES FOR ALL OF THE PAGES 
 @app.route('/')
 def index():
@@ -69,6 +48,31 @@ def obs():
 
 
 ##Make new route for API
+
+#test route
+
+@app.route('/test')
+def test(): 
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist = []
+    for alien in aliens:
+        alienslist.append({
+            '_id': str(alien['_id']),
+             "City": str(alien['city']),
+             "State": str(alien['state']),
+             "Shape": str(alien['shape']),
+             "Duration": str(alien['duration (seconds)']),
+             "Lat": str(alien['latitude']),
+             "Long": str(alien['longitude']),
+            "Month": str(alien['Month']),
+            "Day": str(alien['Day']),
+             "Time": str(alien['Time']),
+            "Year": str(alien['Year'])
+            #add in field names 
+        })
+        
+    return jsonify(alienslist)
+    
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
