@@ -24,7 +24,7 @@ def index():
 #about
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('templates\about.html')
 
 #analyze 
 @app.route('/analyze')
@@ -44,7 +44,7 @@ def jsdata():
 #obs
 @app.route('/obs')
 def obs():
-    return render_template('obs.html')
+    return render_template('templates\obs.html')
 
 
 ##Make new route for API
@@ -72,7 +72,7 @@ def test():
         })
         
     return jsonify(alienslist)
-    
+
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
