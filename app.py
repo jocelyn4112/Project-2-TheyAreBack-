@@ -24,7 +24,7 @@ def index():
 #about
 @app.route('/about')
 def about():
-    return render_template('templates\about.html')
+    return render_template('about.html')
 
 #analyze 
 @app.route('/analyze')
@@ -44,7 +44,7 @@ def jsdata():
 #obs
 @app.route('/obs')
 def obs():
-    return render_template('templates\obs.html')
+    return render_template('obs.html')
 
 
 ##Make new route for API
