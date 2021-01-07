@@ -1,101 +1,107 @@
-#Import needed stuff
+# Import needed stuff
 from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
 import pymongo
 
-#Build App
+# Build App
 app = Flask(__name__)
 
-#Configure
-app.config['MONGO_URI'] = environ.get('MONGODB_URI', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
+# Configure
+app.config['MONGO_URI'] = environ.get(
+    'MONGODB_URI', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
 
-#Initalize Mongo CLient
+# Initalize Mongo CLient
 mongo = PyMongo(app)
 
 
-
-#Routes - render templates 
+# Routes - render templates
 @app.route('/')
 def index():
     return render_template('index.html')
 
 # Individual Page Routes
-#about
+# about
 @app.route('/about')
 def about():
-    return render_template('templates\about.html')
+    return render_template('About.html')
 
-#analyze 
+# analyze
 @app.route('/analyze')
 def analyze():
-    return render_template('analyze.html')
+    return render_template('Analyze.html')
 
-#explore
+# explore
 @app.route('/explore')
 def explore():
-    return render_template('explore.html')
+    return render_template('Explore.html')
 
-#jsdata
+# jsdata
 @app.route('/jsdata')
 def jsdata():
-    return render_template('jsdata.html')
+    return render_template('JSData.html')
 
-#obs
+# obs
 @app.route('/obs')
 def obs():
-    return render_template('templates\obs.html')
+    return render_template('obs.html')
 
 
-##Make new route for API
+# Make new route for API
 
-#test route
+# @app.route('/api/alien-mongo')
+# # Call up DB
+# def AliensMongo():
+#     aliens = mongo.db['Scrubbed & Cleaned'].find()
+#     alienslist = []
+#     for alien in aliens:
+#         alienslist.append({
+#             '_id': str(alien['_id']),
+#             "City": str(alien['city']),
+#             "State": str(alien['state']),
+#             "Shape": str(alien['shape']),
+#             "Duration": str(alien['duration (seconds)']),
+#             "Lat": str(alien['latitude']),
+#             "Long": str(alien['longitude']),
+#             "Month": str(alien['Month']),
+#             "Day": str(alien['Day']),
+#             "Time": str(alien['Time']),
+#             "Year": str(alien['Year'])
+#             # add in field names
+#         })
 
-@app.route('/test')
-def test(): 
+#     return jsonify(alienslist)
+
+
+@app.route('/geojson')
+def test():
     aliens = mongo.db['Scrubbed & Cleaned'].find()
-    alienslist = []
+    alienslist2 = [
+        {"type": "FeatureCollection",
+        "features": []
+        }
+    ]
     for alien in aliens:
-        alienslist.append({
-            '_id': str(alien['_id']),
-             "City": str(alien['city']),
-             "State": str(alien['state']),
-             "Shape": str(alien['shape']),
-             "Duration": str(alien['duration (seconds)']),
-             "Lat": str(alien['latitude']),
-             "Long": str(alien['longitude']),
-            "Month": str(alien['Month']),
-            "Day": str(alien['Day']),
-             "Time": str(alien['Time']),
-            "Year": str(alien['Year'])
-            #add in field names 
-        })
-        
-    return jsonify(alienslist)
-
-@app.route('/api/alien-mongo')
-#Call up DB
-def AliensMongo ():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
-    alienslist = []
-    for alien in aliens:
-        alienslist.append({
-            '_id': str(alien['_id']),
-             "City": str(alien['city']),
-             "State": str(alien['state']),
-             "Shape": str(alien['shape']),
-             "Duration": str(alien['duration (seconds)']),
-             "Lat": str(alien['latitude']),
-             "Long": str(alien['longitude']),
-            "Month": str(alien['Month']),
-            "Day": str(alien['Day']),
-             "Time": str(alien['Time']),
-            "Year": str(alien['Year'])
-            #add in field names 
-        })
-        
-    return jsonify(alienslist)
-
+        alienslist2[0]["features"].append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [str(alien['latitude']), str(alien['longitude'])]
+                    }, 
+            "properties": {
+                "City": str(alien['city']),
+                "State": str(alien['state']),
+                "Shape": str(alien['shape']),
+                "Duration": str(alien['duration (seconds)']),
+                "Month": str(alien['Month']),
+                "Day": str(alien['Day']),
+                "Time": str(alien['Time']),
+                "Year": str(alien['Year'])
+                }
+            })
+     
+    return jsonify(alienslist2)
 
 
 if __name__ == '__main__':
