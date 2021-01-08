@@ -96,7 +96,35 @@ def AliensMongo ():
         
     return jsonify(alienslist)
 
-
+@app.route('/geojson')
+def test1():
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist2 = [
+        {"type": "FeatureCollection",
+        "features": []
+        }
+    ]
+    for alien in aliens:
+        alienslist2[0]["features"].append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [str(alien['latitude']), str(alien['longitude'])]
+                    }, 
+            "properties": {
+                "City": str(alien['city']),
+                "State": str(alien['state']),
+                "Shape": str(alien['shape']),
+                "Duration": str(alien['duration (seconds)']),
+                "Month": str(alien['Month']),
+                "Day": str(alien['Day']),
+                "Time": str(alien['Time']),
+                "Year": str(alien['Year'])
+                }
+            })
+     
+    return jsonify(alienslist2)
 
 if __name__ == '__main__':
     app.run(debug=True)
