@@ -24,7 +24,11 @@ def index():
 # about
 @app.route('/about')
 def about():
+<<<<<<< HEAD
     return render_template('About.html')
+=======
+    return render_template('about.html')
+>>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
 
 # analyze
 @app.route('/analyze')
@@ -47,6 +51,7 @@ def obs():
     return render_template('obs.html')
 
 
+<<<<<<< HEAD
 # Make new route for API
 
 # @app.route('/api/alien-mongo')
@@ -75,6 +80,37 @@ def obs():
 
 @app.route('/geojson')
 def test():
+=======
+##Make new route for API
+
+#test route
+
+@app.route('/test')
+def test(): 
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist = []
+    for alien in aliens:
+        alienslist.append({
+            '_id': str(alien['_id']),
+             "City": str(alien['city']),
+             "State": str(alien['state']),
+             "Shape": str(alien['shape']),
+             "Duration": str(alien['duration (seconds)']),
+             "Lat": str(alien['latitude']),
+             "Long": str(alien['longitude']),
+            "Month": str(alien['Month']),
+            "Day": str(alien['Day']),
+             "Time": str(alien['Time']),
+            "Year": str(alien['Year'])
+            #add in field names 
+        })
+        
+    return jsonify(alienslist)
+
+@app.route('/api/alien-mongo')
+#Call up DB
+def AliensMongo ():
+>>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
     aliens = mongo.db['Scrubbed & Cleaned'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
@@ -82,6 +118,35 @@ def test():
         }
     ]
     for alien in aliens:
+<<<<<<< HEAD
+=======
+        alienslist.append({
+            '_id': str(alien['_id']),
+             "City": str(alien['city']),
+             "State": str(alien['state']),
+             "Shape": str(alien['shape']),
+             "Duration": str(alien['duration (seconds)']),
+             "Lat": str(alien['latitude']),
+             "Long": str(alien['longitude']),
+            "Month": str(alien['Month']),
+            "Day": str(alien['Day']),
+             "Time": str(alien['Time']),
+            "Year": str(alien['Year'])
+            #add in field names 
+        })
+        
+    return jsonify(alienslist)
+
+@app.route('/geojson')
+def test1():
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alienslist2 = [
+        {"type": "FeatureCollection",
+        "features": []
+        }
+    ]
+    for alien in aliens:
+>>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
         alienslist2[0]["features"].append(
             {
                 "type": "Feature",
@@ -102,7 +167,10 @@ def test():
             })
      
     return jsonify(alienslist2)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
 
 if __name__ == '__main__':
     app.run(debug=True)
