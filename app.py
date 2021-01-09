@@ -3,6 +3,7 @@ from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
 import pymongo
+import pandas as pd
 
 # Build App
 app = Flask(__name__)
@@ -24,64 +25,30 @@ def index():
 # about
 @app.route('/about')
 def about():
-<<<<<<< HEAD
-    return render_template('About.html')
-=======
     return render_template('about.html')
->>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
 
 # analyze
 @app.route('/analyze')
 def analyze():
-    return render_template('Analyze.html')
+    return render_template('vizulizations.html')
 
 # explore
 @app.route('/explore')
 def explore():
-    return render_template('Explore.html')
+    return render_template('explore.html')
 
 # jsdata
 @app.route('/jsdata')
 def jsdata():
-    return render_template('JSData.html')
+    return render_template('JSData')
 
-# obs
-@app.route('/obs')
-def obs():
-    return render_template('obs.html')
-
-
-<<<<<<< HEAD
-# Make new route for API
-
-# @app.route('/api/alien-mongo')
-# # Call up DB
-# def AliensMongo():
-#     aliens = mongo.db['Scrubbed & Cleaned'].find()
-#     alienslist = []
-#     for alien in aliens:
-#         alienslist.append({
-#             '_id': str(alien['_id']),
-#             "City": str(alien['city']),
-#             "State": str(alien['state']),
-#             "Shape": str(alien['shape']),
-#             "Duration": str(alien['duration (seconds)']),
-#             "Lat": str(alien['latitude']),
-#             "Long": str(alien['longitude']),
-#             "Month": str(alien['Month']),
-#             "Day": str(alien['Day']),
-#             "Time": str(alien['Time']),
-#             "Year": str(alien['Year'])
-#             # add in field names
-#         })
-
-#     return jsonify(alienslist)
+# # obs
+# @app.route('/obs')
+# def obs():
+#     return render_template('obs.html')
 
 
-@app.route('/geojson')
-def test():
-=======
-##Make new route for API
+##Make new routes for API calls
 
 #test route
 
@@ -110,16 +77,8 @@ def test():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
->>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
     aliens = mongo.db['Scrubbed & Cleaned'].find()
-    alienslist2 = [
-        {"type": "FeatureCollection",
-        "features": []
-        }
-    ]
     for alien in aliens:
-<<<<<<< HEAD
-=======
         alienslist.append({
             '_id': str(alien['_id']),
              "City": str(alien['city']),
@@ -146,7 +105,6 @@ def test1():
         }
     ]
     for alien in aliens:
->>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
         alienslist2[0]["features"].append(
             {
                 "type": "Feature",
@@ -167,10 +125,32 @@ def test1():
             })
      
     return jsonify(alienslist2)
-<<<<<<< HEAD
 
-=======
->>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
+@app.route('/pooled')
+def pooled ():
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alien_df =  pd.DataFrame.from_records(aliens)
+
+    # Delete the _id
+    alien_df.drop(columns=['_id', 'Unique_ID'], inplace = True)
+
+    alien_df['duration (seconds)']=pd.to_numeric(alien_df['duration (seconds)'])
+
+    alien_df['duration']=alien_df['duration (seconds)']
+    alien_bystate=alien_df.groupby(['Year','state','shape'], as_index=False).agg(
+        {
+            'duration (seconds)': sum,
+            'duration': 'mean',
+            'city': 'count'
+        }
+    )
+    alien_bystate=alien_bystate.rename(columns={
+        "duration (seconds)": "total duration", 
+        "duration": "mean duration", 
+        "city":"number of sightings"
+        }
+    )
+    return alien_bystate.to_json(orient='records')
 
 if __name__ == '__main__':
     app.run(debug=True)
