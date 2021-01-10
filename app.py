@@ -25,7 +25,7 @@ def index():
 @app.route('/about')
 def about():
 
-    return render_template('About.html')
+    return render_template('about.html')
 # =======
 #     return render_template('about.html')
 # >>>>>>> 42016551d94bd17fe1ce21aa4cef0ab5a5a6868e
@@ -33,23 +33,46 @@ def about():
 # analyze
 @app.route('/analyze')
 def analyze():
-    return render_template('Analyze.html')
+    return render_template('analyze.html')
 
 # explore
 @app.route('/explore')
 def explore():
-    return render_template('Explore.html')
+    return render_template('explore.html')
 
 # jsdata
 @app.route('/jsdata')
 def jsdata():
-    return render_template('JSData.html')
+    return render_template('jsdata.html')
 
 # obs
 @app.route('/obs')
 def obs():
     return render_template('obs.html')
 
+#Pooled Api Route
+@app.route('/pooled')
+def pooled ():
+    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    alien_df =  pd.DataFrame.from_records(aliens)
+    # Delete the _id
+    alien_df.drop(columns=['_id', 'Unique_ID'], inplace = True)
+    alien_df['duration (seconds)']=pd.to_numeric(alien_df['duration (seconds)'])
+    alien_df['duration']=alien_df['duration (seconds)']
+    alien_bystate=alien_df.groupby(['Year','state','shape'], as_index=False).agg(
+        {
+            'duration (seconds)': sum,
+            'duration': 'mean',
+            'city': 'count'
+        }
+    )
+    alien_bystate=alien_bystate.rename(columns={
+        "duration (seconds)": "total duration", 
+        "duration": "mean duration", 
+        "city":"number of sightings"
+        }
+    )
+    return alien_bystate.to_json(orient='records')
 
 # Make new route for API
 
