@@ -53,7 +53,7 @@ def obs():
 #Pooled Api Route
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
     # Delete the _id
     alien_df.drop(columns=['_id', 'Unique_ID'], inplace = True)
@@ -79,7 +79,7 @@ def pooled ():
 # @app.route('/api/alien-mongo')
 # # Call up DB
 # def AliensMongo():
-#     aliens = mongo.db['Scrubbed & Cleaned'].find()
+#     aliens = mongo.db['Final_Aliens'].find()
 #     alienslist = []
 #     for alien in aliens:
 #         alienslist.append({
@@ -102,7 +102,7 @@ def pooled ():
 
 @app.route('/geojson')
 def test():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
