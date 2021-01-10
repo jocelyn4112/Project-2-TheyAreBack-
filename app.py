@@ -54,7 +54,7 @@ def jsdata():
 
 @app.route('/test')
 def test(): 
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     alienslist = []
     for alien in aliens:
         alienslist.append({
@@ -77,7 +77,7 @@ def test():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     for alien in aliens:
         alienslist.append({
             '_id': str(alien['_id']),
@@ -98,7 +98,7 @@ def AliensMongo ():
 
 @app.route('/geojson')
 def test1():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
@@ -128,7 +128,7 @@ def test1():
 
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Scrubbed & Cleaned'].find()
+    aliens = mongo.db['Final_Aliens'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
 
     # Delete the _id
