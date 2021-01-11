@@ -94,7 +94,7 @@
             
                 <!-- Featured Project Row WORD CLOUD -->
                 <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\mean.JPG" alt="" /></div>
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\graph.JPG" alt="" /></div>
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\bar.JPG" alt="" /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
@@ -106,10 +106,10 @@
                         </div>
                     </div>
                 </div>
-           <div></div>>
+           <div></div>
            <section></section>
                 <script>
-                   Plotly.d3.csv('https://raw.githubusercontent.com/jocelyn4112/Project-2-TheyAreBack-/Nate/grouped_ufo_data.csv', function (err, data) {
+                   Plotly.d3.json('pooled', function (err, data) {
   // Create a lookup table to sort and regroup the columns of data,
   // first by year, then by shape:
   var lookup = {};
