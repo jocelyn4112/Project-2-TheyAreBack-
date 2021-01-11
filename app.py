@@ -3,6 +3,7 @@ from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
 import pymongo
+import pandas as pd 
 
 # Build App
 app = Flask(__name__)
@@ -33,7 +34,7 @@ def about():
 # analyze
 @app.route('/analyze')
 def analyze():
-    return render_template('analyze.html')
+    return render_template('visualizations.html')
 
 # explore
 @app.route('/explore')
