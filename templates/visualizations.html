@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Alien Analysis</title>
+        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
+        <!-- Jqerry-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Font Awesome icons -->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../static/css/styles.css" rel="stylesheet" />
+         <!-- D3 -->
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <!-- Things to get Heroku to work-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <!-- Plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="/">Home</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="explore">Explore</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="analyze">Analyze</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="obs">Observations</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="about">About</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="jsdata">Data</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      
+        <!-- About-->
+        
+            </script>
+            <!-- About-->
+            <section class="about-section text-center" id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <!--<img class="bimg-fluid" src="assets/img/Sky2.jpg" alt="" />-->
+                            <h2 class="text-white mb-4">Analysis </h2>
+                            <p class="text-white-50">
+                               
+                            </p>
+                        </div>
+                    </div>
+                   
+                </div>
+    
+                <div class="container">
+                    <div class="row">
+                      <div class="col-md-12 jumbotron text-center">
+                     <h1>We Are Not Alone Dashboard</h1>
+                     <h1>Use the Interactive Charts Below To Explore The Dataset</h1>
+
+                      </div>
+                    </div>
+                    
+    
+    
+    
+    
+           
+            </section>
+           
+            
+                </section>
+           
+            
+            <!-- Contact-->
+      
+        <!-- Projects 2 -->
+        <section class="projects-section bg-light" id="projects">
+            <div class="container" id ='MyDiv'>
+            
+                <!-- Featured Project Row WORD CLOUD -->
+                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\graph.JPG" alt="" /></div>
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\bar.JPG" alt="" /></div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left">
+                          <img class="card-img-top" src="../static\assets\alien_wordsbw.png" alt="">
+                          <div class="card-body">
+               
+            </div>  
+                            
+                        </div>
+                    </div>
+                </div>
+           <div></div>
+           <section></section>
+                <script>
+                   Plotly.d3.json('pooled', function (err, data) {
+  // Create a lookup table to sort and regroup the columns of data,
+  // first by year, then by shape:
+  var lookup = {};
+  function getData(year, shape) {
+    var byYear, trace;
+    if (!(byYear = lookup[year])) {;
+      byYear = lookup[year] = {};
+    }
+   // If a container for this year + shape doesn't exist yet,
+   // then create one:
+    if (!(trace = byYear[shape])) {
+      trace = byYear[shape] = {
+        x: [],
+        y: [],
+        id: [],
+        text: [],
+        marker: {size: []}
+      };
+    }
+    return trace;
+  }
+
+  // Go through each row, get the right trace, and append the data:
+    for (var i = 0; i < data.length; i++) {
+    var datum = data[i];
+    var trace = getData(datum.Year, datum.shape);
+    trace.text.push(datum.shape);
+    trace.id.push(datum.shape);
+    trace.x.push(datum['mean duration']);
+    trace.y.push(datum['number of sightings']);
+    trace.marker.size.push(datum['total duration'] * 500);
+
+  }
+//console.log(trace)
+  // Get the group names:
+  var years = Object.keys(lookup);
+  // In this case, every year includes every shape, so we
+// can just infer the shape from the *first* year:
+
+  var firstYear = lookup[years[0]];
+   var shape = Object.keys(firstYear);
+
+                   
+  // Create the main traces, one for each shape:
+  var traces = [];
+  for (i = 0; i < shape.length; i++) {
+    var data = firstYear[shape[i]];
+   // One small note. We're creating a single trace here, to which
+   // the frames will pass data for the different years. It's
+   // subtle, but to avoid data reference problems, we'll slice 
+   // the arrays to ensure we never write any new data into our
+   // lookup table:
+    traces.push({
+      name: shape[i],
+      x: data.x.slice(),
+      y: data.y.slice(),
+      id: data.id.slice(),
+      text: data.text.slice(),
+      mode: 'markers',
+      marker: {
+      size: data.marker.size.slice(),
+        sizemode: 'area',
+        sizeref: 200000
+      }
+    });
+  }
+
+  // Create a frame for each year. Frames are effectively just
+  // traces, except they don't need to contain the *full* trace
+  // definition (for example, appearance). The frames just need
+  // the parts the traces that change (here, the data).
+  var frames = [];
+  for (i = 0; i < years.length; i++) {
+    frames.push({
+      name: years[i],
+      data: shape.map(function (shape) {
+        return getData(years[i], shape);
+      })
+    })
+  }
+  
+  // Now create slider steps, one for each frame. The slider
+  // executes a plotly.js API command (here, Plotly.animate).
+  // In this example, we'll animate to one of the named frames
+  // created in the above loop.
+  var sliderSteps = [];
+  for (i = 0; i < years.length; i++) {
+    sliderSteps.push({
+      method: 'animate',
+      label: years[i],
+      args: [[years[i]], {
+        mode: 'immediate',
+        transition: {duration: 300},
+        frame: {duration: 300, redraw: false},
+      }]
+    });
+  }
+  
+  var layout = {
+    xaxis: {
+      title: 'mean duration',
+      range: [0, 500000]
+    },
+    yaxis: {
+      title: 'number of sightings',
+      range: [0, 100]
+    },
+    hovermode: 'closest',
+   // We'll use updatemenus (whose functionality includes menus as
+   // well as buttons) to create a play button and a pause button.
+   // The play button works by passing `null`, which indicates that
+   // Plotly should animate all frames. The pause button works by
+   // passing `[null]`, which indicates we'd like to interrupt any
+   // currently running animations with a new list of frames. Here
+   // The new list of frames is empty, so it halts the animation.
+    updatemenus: [{
+      x: 0,
+      y: 0,
+      yanchor: 'top',
+      xanchor: 'left',
+      showactive: false,
+      direction: 'left',
+      type: 'buttons',
+      pad: {t: 87, r: 10},
+      buttons: [{
+        method: 'animate',
+        args: [null, {
+          mode: 'immediate',
+          fromcurrent: true,
+          transition: {duration: 300},
+          frame: {duration: 500, redraw: false}
+        }],
+        label: 'Play'
+      }, {
+        method: 'animate',
+        args: [[null], {
+          mode: 'immediate',
+          transition: {duration: 0},
+          frame: {duration: 0, redraw: false}
+        }],
+        label: 'Pause'
+      }]
+    }],
+   // Finally, add the slider and use `pad` to position it
+   // nicely next to the buttons.
+    sliders: [{
+      pad: {l: 130, t: 55},
+      currentvalue: {
+        visible: true,
+        prefix: 'Year:',
+        xanchor: 'right',
+        font: {size: 20, color: '#666'}
+      },
+      steps: sliderSteps
+    }]
+  };
+  
+  // Create the plot:
+  Plotly.plot('MyDiv', {
+    data: traces,
+    layout: layout,
+   config: {showSendToCloud:true},
+    frames: frames,
+  });
+});
+                  </script>
+           
+            </section>
+        
+        <!-- Contact-->
+        <section class="contact-section bg-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">LinkedIn</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50"><a href="https://www.linkedin.com/in/jocelyn-conard-52b2a21/">Jocelyn Conard</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Email</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50"><a href="#!">jocelyn4112@gmail.com</a></div>
+                                <div class="small text-black-50"><a href="#!">haiwy1218@gmail.com</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">GitHub</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50"><a href="https://github.com/jocelyn4112">jocelyn4112</a></div>
+                                <div class="small text-black-50"><a href="https://github.com/haiwy1218">haiwy1218</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+       
+        <!--Footer-->
+       <footer class="footer bg-black small text-center text-white-50"><div class="container"></div></footer>
+       <!-- Bootstrap core JS-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+       <!-- Third party plugin JS-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+       <!-- Jqerry-->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <!-- Core theme Stuff in Stuffs, More Stuff in Stuffs JS-->
+       <script src="../static/js/scripts.js"></script>
+        <script src="../static/js/data.js"></script>
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
+        <!-- D3 JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+
+    </body>
+</html>
