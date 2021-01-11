@@ -6258,6 +6258,10 @@ button.bg-danger:focus {
   background-color: #00050a !important;
 }
 
+.bg-vblack {
+  background-color: #000000 !important;
+}
+
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
 button.bg-light:focus {
