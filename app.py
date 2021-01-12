@@ -95,35 +95,35 @@ def AliensMongo ():
         
     return jsonify(alienslist)
 
-@app.route('/geojson')
-def test1():
-    aliens = mongo.db['Aliens3'].find()
-    alienslist2 = [
-        {"type": "FeatureCollection",
-        "features": []
-        }
-    ]
-    for alien in aliens:
-        alienslist2[0]["features"].append(
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [str(alien['latitude']), str(alien['longitude'])]
-                    }, 
-            "properties": {
-                "City": str(alien['city']),
-                "State": str(alien['state']),
-                "Shape": str(alien['shape']),
-                "Duration": str(alien['duration (seconds)']),
-                "Month": str(alien['Month']),
-                "Day": str(alien['Day']),
-                "Time": str(alien['Time']),
-                "Year": str(alien['Year'])
-                }
-            })
+# @app.route('/geojson')
+# def test1():
+#     aliens = mongo.db['Aliens3'].find()
+#     alienslist2 = [
+#         {"type": "FeatureCollection",
+#         "features": []
+#         }
+#     ]
+#     for alien in aliens:
+#         alienslist2[0]["features"].append(
+#             {
+#                 "type": "Feature",
+#                 "geometry": {
+#                     "type": "Point",
+#                     "coordinates": [str(alien['latitude']), str(alien['longitude'])]
+#                     }, 
+#             "properties": {
+#                 "City": str(alien['city']),
+#                 "State": str(alien['state']),
+#                 "Shape": str(alien['shape']),
+#                 "Duration": str(alien['duration (seconds)']),
+#                 "Month": str(alien['Month']),
+#                 "Day": str(alien['Day']),
+#                 "Time": str(alien['Time']),
+#                 "Year": str(alien['Year'])
+#                 }
+#             })
      
-    return jsonify(alienslist2)
+#     return jsonify(alienslist2)
 
 @app.route('/pooled')
 def pooled ():
@@ -170,3 +170,51 @@ if __name__ == '__main__':
 #   "Year": "Year"
 # }
 
+@app.route('/geojson')
+def test():
+    # aliens = mongo.db['Final_Aliens'].find()
+    alien_df = pd.read_csv('static/assets/cleaned_Final_ufo_data.csv')
+    alienslist2 = [{"type": "FeatureCollection", "features": []}]
+    for index, row in alien_df.iterrows():
+        alienslist2[0]["features"].append(
+            {"type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [str(row['latitude']), str(row['longitude'])]
+                }, 
+            "properties": {
+                "City": str(row['city']),
+                "State": str(row['state']),
+                "Shape": str(row['shape']),
+                "Duration": str(row['duration (seconds)']),
+                "Month": str(row['Month']),
+                "Day": str(row['Day']),
+                "Time": str(row['Time']),
+                "Year": str(row['Year'])
+                }
+            })
+    # alienslist2 = [
+    #     {"type": "FeatureCollection",
+    #     "features": []
+    #     }
+    # ]
+    # for alien in aliens:
+    #     alienslist2[0]["features"].append(
+    #         {
+    #             "type": "Feature",
+    #             "geometry": {
+    #                 "type": "Point",
+    #                 "coordinates": [str(alien['latitude']), str(alien['longitude'])]
+    #                 }, 
+    #         "properties": {
+    #             "City": str(alien['city']),
+    #             "State": str(alien['state']),
+    #             "Shape": str(alien['shape']),
+    #             "Duration": str(alien['duration (seconds)']),
+    #             "Month": str(alien['Month']),
+    #             "Day": str(alien['Day']),
+    #             "Time": str(alien['Time']),
+    #             "Year": str(alien['Year'])
+    #             }
+    #         })
+    return jsonify(alienslist2)
