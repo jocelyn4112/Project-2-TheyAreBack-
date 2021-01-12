@@ -172,7 +172,7 @@ if __name__ == '__main__':
 
 @app.route('/geojson')
 def test():
-    # aliens = mongo.db['Final_Aliens'].find()
+    aliens = mongo.db['Aliens3'].find()
     alien_df = pd.read_csv('static/assets/cleaned_Final_ufo_data.csv')
     alienslist2 = [{"type": "FeatureCollection", "features": []}]
     for index, row in alien_df.iterrows():
