@@ -27,9 +27,9 @@ def about():
     return render_template('about.html')
 
 # analyze
-@app.route('/analyze')
-def analyze():
-    return render_template('vizulizations.html')
+@app.route('/visulizations')
+def visulizations():
+    return render_template('visulizations.html')
 
 # explore
 @app.route('/explore')
