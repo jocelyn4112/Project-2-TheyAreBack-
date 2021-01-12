@@ -9,7 +9,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Configure
-app.config['MONGO_URI'] = environ.get('MONGODB_URI', 'mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
+app.config['MONGO_URI'] = environ.get('MONGODB_URI','mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
 
 # Initalize Mongo CLient
 mongo = PyMongo(app)
@@ -36,10 +36,10 @@ def analyze():
 def explore():
     return render_template('explore.html')
 
-# jsdata
-@app.route('/jsdata')
+# data
+@app.route('/datafilter')
 def jsdata():
-    return render_template('JSData')
+    return render_template('datafilter.html')
 
 # # obs
 # @app.route('/obs')
