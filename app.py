@@ -9,20 +9,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Configure
-app.config['MONGO_URI'] = environ.get(
-    'MONGODB_URI', '# Import needed stuff
-from flask import Flask, jsonify, render_template
-from flask_pymongo import PyMongo
-from os import environ
-import pymongo
-import pandas as pd
-
-# Build App
-app = Flask(__name__)
-
-# Configure
-app.config['MONGO_URI'] = environ.get(
-    'MONGODB_URI', 'mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
+app.config['MONGO_URI'] = environ.get('MONGODB_URI', 'mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
 
 # Initalize Mongo CLient
 mongo = PyMongo(app)
@@ -182,7 +169,7 @@ if __name__ == '__main__':
 #   "Time": "Time"
 #   "Year": "Year"
 # }
-')
+
 
 # Initalize Mongo CLient
 mongo = PyMongo(app)
