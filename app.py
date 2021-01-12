@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Configure
 app.config['MONGO_URI'] = environ.get(
-    'MONGODB_URI', 'mongodb+srv://admin:Aliens2@cluster0.d3dkn.mongodb.net/AliensAll?retryWrites=true&w=majority')
+    'MONGODB_URI', 'mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
 
 # Initalize Mongo CLient
 mongo = PyMongo(app)
@@ -54,7 +54,7 @@ def jsdata():
 
 @app.route('/test')
 def test(): 
-    aliens = mongo.db['Final_Aliens'].find()
+    aliens = mongo.db['Aliens3'].find()
     alienslist = []
     for alien in aliens:
         alienslist.append({
@@ -77,7 +77,7 @@ def test():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
-    aliens = mongo.db['Final_Aliens'].find()
+    aliens = mongo.db['Aliens3'].find()
     for alien in aliens:
         alienslist.append({
             '_id': str(alien['_id']),
@@ -98,7 +98,7 @@ def AliensMongo ():
 
 @app.route('/geojson')
 def test1():
-    aliens = mongo.db['Final_Aliens'].find()
+    aliens = mongo.db['Aliens3'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
@@ -128,7 +128,7 @@ def test1():
 
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Final_Aliens'].find()
+    aliens = mongo.db['Aliens3'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
 
     # Delete the _id
