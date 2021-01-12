@@ -74,32 +74,7 @@
 
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <div class="well">
-                          <h5>Year</h5>
-                          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-                        </div>
-                        <div class="panel panel-primary">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">UFO Info</h3>
-                          </div>
-                          <div id="sample-metadata" class="panel-body"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-5">
-                        
-                      </div>
-                      <div class="col-md-5">
-                        
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        
-                      </div>
-                    </div>
-                  </div>
+                    
     
     
     
@@ -119,29 +94,34 @@
             
                 <!-- Featured Project Row WORD CLOUD -->
                 <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\alien_wordsbw.png" alt="" /></div>
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\mean.JPG" alt="" /></div>
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../static\assets\bar.JPG" alt="" /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            
+                          <img class="card-img-top" src="../static\assets\alien_wordsbw.png" alt="">
+                          <div class="card-body">
+               
+            </div>  
                             
                         </div>
                     </div>
                 </div>
-           
+           <div></div>>
+           <section></section>
                 <script>
-                   Plotly.d3.csv('https://raw.githubusercontent.com/jocelyn4112/Project-2-TheyAreBack-/main/Master_sheet_ufo_data_3.csv', function (err, data) {
+                   Plotly.d3.csv('https://raw.githubusercontent.com/jocelyn4112/Project-2-TheyAreBack-/Nate/grouped_ufo_data.csv', function (err, data) {
   // Create a lookup table to sort and regroup the columns of data,
   // first by year, then by shape:
   var lookup = {};
-  function getData(year, state) {
+  function getData(year, shape) {
     var byYear, trace;
     if (!(byYear = lookup[year])) {;
       byYear = lookup[year] = {};
     }
    // If a container for this year + shape doesn't exist yet,
    // then create one:
-    if (!(trace = byYear[state])) {
-      trace = byYear[state] = {
+    if (!(trace = byYear[shape])) {
+      trace = byYear[shape] = {
         x: [],
         y: [],
         id: [],
@@ -155,44 +135,42 @@
   // Go through each row, get the right trace, and append the data:
     for (var i = 0; i < data.length; i++) {
     var datum = data[i];
-    var trace = getData(datum.Year, datum.state);
+    var trace = getData(datum.Year, datum.shape);
     trace.text.push(datum.shape);
     trace.id.push(datum.shape);
-    trace.x.push(datum.Year);
-    trace.y.push(datum['duration (seconds)']);
-    trace.marker.size.push(100);
+    trace.x.push(datum['mean duration']);
+    trace.y.push(datum['number of sightings']);
+    trace.marker.size.push(datum['total duration'] * 500);
 
   }
-console.log(trace)
+//console.log(trace)
   // Get the group names:
   var years = Object.keys(lookup);
   // In this case, every year includes every shape, so we
-  
 // can just infer the shape from the *first* year:
 
- 
-  var Year = lookup[years[0]];
-   var state = Object.keys(years);
+  var firstYear = lookup[years[0]];
+   var shape = Object.keys(firstYear);
 
                    
   // Create the main traces, one for each shape:
   var traces = [];
-  for (i = 0; i < state.length; i++) {
-    var data = Year[state[0]];
+  for (i = 0; i < shape.length; i++) {
+    var data = firstYear[shape[i]];
    // One small note. We're creating a single trace here, to which
    // the frames will pass data for the different years. It's
    // subtle, but to avoid data reference problems, we'll slice 
    // the arrays to ensure we never write any new data into our
    // lookup table:
     traces.push({
-      name: state[i],
-     // x: data.x.slice(),
-      //y: data.y.slice(),
-      //id: data.id.slice(),
-      //text: data.text.slice(),
+      name: shape[i],
+      x: data.x.slice(),
+      y: data.y.slice(),
+      id: data.id.slice(),
+      text: data.text.slice(),
       mode: 'markers',
       marker: {
-        //size: data.marker.size.slice(),
+      size: data.marker.size.slice(),
         sizemode: 'area',
         sizeref: 200000
       }
@@ -207,8 +185,8 @@ console.log(trace)
   for (i = 0; i < years.length; i++) {
     frames.push({
       name: years[i],
-      data: state.map(function (state) {
-        return getData(years[i], state);
+      data: shape.map(function (shape) {
+        return getData(years[i], shape);
       })
     })
   }
@@ -232,12 +210,12 @@ console.log(trace)
   
   var layout = {
     xaxis: {
-      title: 'Year',
-      range: [1993, 2020]
+      title: 'mean duration',
+      range: [0, 500000]
     },
     yaxis: {
-      title: 'duration (seconds)',
-      range: [0, 1000]
+      title: 'number of sightings',
+      range: [0, 100]
     },
     hovermode: 'closest',
    // We'll use updatemenus (whose functionality includes menus as
