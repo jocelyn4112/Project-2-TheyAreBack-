@@ -1,4 +1,4 @@
-/ On change to the DDM, runs function to fetch and render new data
+// On change to the DDM, runs function to fetch and render new data
 function optionChanged(id) {
     getData(id);
 }
