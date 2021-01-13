@@ -41,6 +41,11 @@ def explore():
 def datafilter():
     return render_template('datafilter.html')
 
+# heatmao
+@app.route('/heatmap')
+def heatmap():
+    return render_template('heatmap.html')
+
 # # obs
 # @app.route('/obs')
 # def obs():
