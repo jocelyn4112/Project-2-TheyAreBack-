@@ -3,13 +3,14 @@ from flask import Flask, jsonify, render_template
 from flask_pymongo import PyMongo
 from os import environ
 import pymongo
-import pandas as pd 
+import pandas as pd
 
 # Build App
 app = Flask(__name__)
 
 # Configure
-app.config['MONGO_URI'] = environ.get('MONGODB_URI','mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens3?retryWrites=true&w=majority')
+app.config['MONGO_URI'] = environ.get(
+    'MONGODB_URI', 'mongodb+srv://admin:Aliens3@cluster0.xa16u.mongodb.net/Aliens4?retryWrites=true&w=majority')
 
 # Initalize Mongo CLient
 mongo = PyMongo(app)
@@ -27,24 +28,19 @@ def about():
     return render_template('about.html')
 
 # analyze
-@app.route('/visualizations')
-def visualizations():
-    return render_template('visualizations.html')
+@app.route('/analyze')
+def analyze():
+    return render_template('vizulizations.html')
 
 # explore
 @app.route('/explore')
 def explore():
     return render_template('explore.html')
 
-# data
-@app.route('/datafilter')
-def datafilter():
-    return render_template('datafilter.html')
-
-# heatmao
-@app.route('/heatmap')
-def heatmap():
-    return render_template('heatmap.html')
+# jsdata
+@app.route('/jsdata')
+def jsdata():
+    return render_template('JSData')
 
 # # obs
 # @app.route('/obs')
@@ -58,7 +54,7 @@ def heatmap():
 
 @app.route('/test')
 def test(): 
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     alienslist = []
     for alien in aliens:
         alienslist.append({
@@ -81,7 +77,7 @@ def test():
 @app.route('/api/alien-mongo')
 #Call up DB
 def AliensMongo ():
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     for alien in aliens:
         alienslist.append({
             '_id': str(alien['_id']),
@@ -102,7 +98,7 @@ def AliensMongo ():
 
 @app.route('/geojson')
 def test1():
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
@@ -132,7 +128,7 @@ def test1():
 
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
 
     # Delete the _id
@@ -174,52 +170,3 @@ if __name__ == '__main__':
 #   "Time": "Time"
 #   "Year": "Year"
 # }
-
-# @app.route('/geojson')
-# def test():
-#     aliens = mongo.db['Aliens3'].find()
-#     alien_df = pd.read_csv('static/assets/cleaned_Final_ufo_data.csv')
-#     alienslist2 = [{"type": "FeatureCollection", "features": []}]
-#     for index, row in alien_df.iterrows():
-#         alienslist2[0]["features"].append(
-#             {"type": "Feature",
-#             "geometry": {
-#                 "type": "Point",
-#                 "coordinates": [str(row['latitude']), str(row['longitude'])]
-#                 }, 
-#             "properties": {
-#                 "City": str(row['city']),
-#                 "State": str(row['state']),
-#                 "Shape": str(row['shape']),
-#                 "Duration": str(row['duration (seconds)']),
-#                 "Month": str(row['Month']),
-#                 "Day": str(row['Day']),
-#                 "Time": str(row['Time']),
-#                 "Year": str(row['Year'])
-#                 }
-#             })
-    # alienslist2 = [
-    #     {"type": "FeatureCollection",
-    #     "features": []
-    #     }
-    # ]
-    # for alien in aliens:
-    #     alienslist2[0]["features"].append(
-    #         {
-    #             "type": "Feature",
-    #             "geometry": {
-    #                 "type": "Point",
-    #                 "coordinates": [str(alien['latitude']), str(alien['longitude'])]
-    #                 }, 
-    #         "properties": {
-    #             "City": str(alien['city']),
-    #             "State": str(alien['state']),
-    #             "Shape": str(alien['shape']),
-    #             "Duration": str(alien['duration (seconds)']),
-    #             "Month": str(alien['Month']),
-    #             "Day": str(alien['Day']),
-    #             "Time": str(alien['Time']),
-    #             "Year": str(alien['Year'])
-    #             }
-    #         })
-    #return jsonify(alienslist2)
