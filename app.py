@@ -28,8 +28,8 @@ def about():
     return render_template('about.html')
 
 # analyze
-@app.route('/analyze')
-def analyze():
+@app.route('/visulizations')
+def visulizations():
     return render_template('visulizations.html')
 
 # explore
