@@ -30,17 +30,22 @@ def about():
 # analyze
 @app.route('/analyze')
 def analyze():
-    return render_template('vizulizations.html')
+    return render_template('visulizations.html')
 
 # explore
 @app.route('/explore')
 def explore():
     return render_template('explore.html')
 
-# jsdata
-@app.route('/jsdata')
-def jsdata():
-    return render_template('JSData')
+# data
+@app.route('/datafilter')
+def datafilter():
+    return render_template('datafilter.html')
+
+# heatmao
+@app.route('/heatmap')
+def heatmap():
+    return render_template('heatmap.html')
 
 # # obs
 # @app.route('/obs')
@@ -98,7 +103,7 @@ def AliensMongo ():
 
 @app.route('/geojson')
 def test1():
-    aliens = mongo.db['Aliens4'].find()
+    aliens = mongo.db['Aliens3'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
@@ -128,7 +133,7 @@ def test1():
 
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Aliens4'].find()
+    aliens = mongo.db['Aliens3'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
 
     # Delete the _id
