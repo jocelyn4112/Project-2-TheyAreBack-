@@ -1,37 +1,41 @@
-/ On change to the DDM, runs function to fetch and render new data
+// On change to the DDM, runs function to fetch and render new data
 function optionChanged(id) {
     getData(id);
 }
 var ufoLayer = new L.LayerGroup();
 var myMap1;
+
 // color function //
-// --purple: #6F42C1',
-// --pink: #E83E8C',
-// --red: #DC3545',
-// --green2: #79D29E',
-// --orange: #FD7E14',
-// --yellow: #FFC107',
-// --green: #28A745',
-// --teal: #64A19D',
-// --cyan: #17A2B8',
-// --green1: #B3E6C8;
-// --gray: #6C757D',
-// --green5: #194D2F',
+// --purple: #6f42c1',
+// --pink: #e83e8c',
+// --red: #dc3545',
+// --green2: #79d29e',
+// --orange: #fd7e14',
+// --yellow: #ffc107',
+// --green: #28a745',
+// --teal: #64a19d',
+// --cyan: #17a2b8',
+// --green1: #b3e6C8;
+// --gray: #6c757d',
+// --green5: #194d2f',
+
 clrs = ["#58B5E1", "#0A4F4E", "#8BD7A0", "#841E41", "#8ADC30", "#7B4DD9", "#E4CCF1", "#1E438D", "#1CF1A3", "#D46052", "#658114", "#FA2E55"]
-// ['#007BFF', 
-//         '#6610F2',
-//         '#6F42C1',
-//         '#E83E8C',
-//         '#DC3545',
-//         '#79D29E',
-//         '#FD7E14',
-//         '#FFC107',
-//         '#28A745',
-//         '#64A19D',
-//         '#17A2B8',
-//         '#B3E6C8',
-//         '#6C757D',
-//         '#194D2F'];
+
+// ['#007bff', 
+//         '#6610f2',
+//         '#6f42c1',
+//         '#e83e8c',
+//         '#dc3545',
+//         '#79d29e',
+//         '#fd7e14',
+//         '#ffc107',
+//         '#28a745',
+//         '#64a19d',
+//         '#17a2b8',
+//         '#b3e6C8',
+//         '#6c757d',
+//         '#194d2f'];
+ 
 function getColor(shape1, shapelist) {
     for (var i=0; i < shapelist.length; i++){
         if (shape1 === shapelist[i]){   
@@ -39,6 +43,7 @@ function getColor(shape1, shapelist) {
         }
     }
 };
+
 function setRaduius(seconds){
     if (seconds <= 3) {
         return 2;
@@ -50,6 +55,7 @@ function setRaduius(seconds){
         return 8;
     }
 };
+
 // funtion fetches data for new visualizations
 function getData(id) {
     myMap1.removeLayer(ufoLayer);
@@ -73,6 +79,7 @@ function getData(id) {
         ufoLayer = L.layerGroup(ufoMarkers).addTo(myMap1);
     });
 }
+
 var ufoMarkers = [];
 var coordinates = [];
 var heat = [];
