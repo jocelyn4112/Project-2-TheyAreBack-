@@ -105,7 +105,7 @@
            
                 <script>
                   
-                   Plotly.d3.csv('https://raw.githubusercontent.com/jocelyn4112/Project-2-TheyAreBack-/Nate/grouped_ufo_data.csv', function (err, data) {
+                   Plotly.d3.json('/pooled', function (err, data) {
   // Create a lookup table to sort and regroup the columns of data,
   // first by year, then by shape:
   var lookup = {};
