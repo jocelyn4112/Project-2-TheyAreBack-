@@ -19,7 +19,7 @@ function getData(id) {
         };
         heatLayer = L.heatLayer(heat, {
             radius: 35,
-            blur: 5,
+            blur: 10,
         });
         heatLayer.addTo(myMap1);
     });
