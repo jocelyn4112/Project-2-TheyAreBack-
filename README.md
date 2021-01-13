@@ -28,6 +28,8 @@ Finally, a third static bar graph compares count of shapes. Light, spherical, tr
 
 An interactive table was developed to explore the sightseeing dataset for a given year in detail. This table includes, for each sightseeing, available information (city, state, shape, duration, latitude and longitude, time of the year). 
 The data in the table can be filtered based on city, state and shape. During future phases of this project, the dropdown tool currently implemented will allow to screen the dataset based on a year of choice.
-Heat Map
+
+##Heat Map
+
 Similar to the map shown in the Explore section, a Leaflet map with heat layers was also developed to show UFO Sightings filtered by year.
 
