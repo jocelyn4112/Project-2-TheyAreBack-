@@ -103,7 +103,7 @@ def AliensMongo ():
 
 @app.route('/geojson')
 def test1():
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     alienslist2 = [
         {"type": "FeatureCollection",
         "features": []
@@ -133,7 +133,7 @@ def test1():
 
 @app.route('/pooled')
 def pooled ():
-    aliens = mongo.db['Aliens3'].find()
+    aliens = mongo.db['Aliens4'].find()
     alien_df =  pd.DataFrame.from_records(aliens)
 
     # Delete the _id
