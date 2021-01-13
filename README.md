@@ -27,7 +27,7 @@ Finally, a third static bar graph compares count of shapes. Light, spherical, tr
 ### Observations
 
 An interactive table was developed to explore the sightseeing dataset for a given year in detail. This table includes, for each sighting, available information (city, state, shape, duration, latitude and longitude, time of the year). 
-The data in the table can be filtered based on city, state and shape. During future phases of this project, the dropdown tool currently implemented will allow to screen the dataset based on a year of choice.
+The data in the table can be filtered based on city, state and shape. A dropdown tool waas implemented to allow the user to screen the dataset based on a year of choice.
 
 ### Heat Map
 
